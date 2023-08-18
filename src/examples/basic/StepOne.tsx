@@ -61,7 +61,7 @@ export default function StepOne({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.lastName?.message}
       </p>
-      <input type="submit" title="submit" />
+      <input type="submit" title="submit" disabled={!isValid} />
     </form>
   );
 }

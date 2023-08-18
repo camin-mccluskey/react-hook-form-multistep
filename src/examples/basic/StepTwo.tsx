@@ -59,7 +59,7 @@ export default function StepTwo({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.address?.countryCode?.message}
       </p>
-      <input type="submit" title="submit" />
+      <input type="submit" title="submit" disabled={!isValid} />
     </form>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MultiStepForm from "../multiStepForm/MultiStepForm";
+import MultiStepForm from "../../multiStepForm/MultiStepForm";
 import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
@@ -23,7 +23,7 @@ const exampleData: ExampleFormData = {
   },
 };
 
-export default function Example() {
+export default function SubmitStepperExample() {
   // store is the scratchpad for the child forms to play around with
   const [store, setStore] = useState<DeepPartial<ExampleFormData>>(exampleData); // this data will actually be a prop or network call
 
@@ -48,11 +48,12 @@ export default function Example() {
   };
 
   return (
-    <MultiStepForm>
+    <MultiStepForm submitOnStepChange>
       <MultiStepForm.Stepper />
       <MultiStepForm.Step
-        renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
+        renderStepForm={({ reportStepValidity, handleStepSubmit, ref }) => (
           <StepOne
+            ref={ref}
             data={store}
             onSubmit={handleStepSubmit(onSubmitStepOne)}
             reportValidity={reportStepValidity}

@@ -1,7 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 import { DeepPartial, FieldValues } from "react-hook-form";
 import { useMultiStepFormContext } from "./MultiStepFormContext";
-import { useRefs } from "react-context-refs";
 
 type FormStepBaseProps<StepFormData extends FieldValues> = {
   data?: DeepPartial<StepFormData>;

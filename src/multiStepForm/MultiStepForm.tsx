@@ -48,28 +48,20 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
   const numSteps = arrayStepChildren.length - (includesStepper ? 1 : 0);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
-  // const submitRef = useRef<MultiStepFormSubmitButtonRefProps>(null);
-  // const onSubmitStep = (afterSubmit: () => void) => {
-  //   submitRef.current?.onSubmit(afterSubmit);
-  // };
+
   const submitButtonRefs = useRefs("submitButton");
-  console.log(submitButtonRefs.length);
   if (submitButtonRefs.length > 1) {
     throw new Error("MultiStepForm must have exactly 1 submit button active.");
   }
-  // const submitButtonRef = submitButtonRefs.at(0)?.current?.click();
-  console.log(submitButtonRefs);
-
   const onChangeStep = useCallback(
     (newStepIndex: number) => {
+      console.log("newStepIndex", newStepIndex);
       if (isFormValid) {
-        // TODO: confirm there is only ever 1 submit button active)
-        console.log(submitButtonRefs);
-        console.log(submitButtonRefs.at(0)?.current.disabled);
+        submitButtonRefs.at(0)?.meta?.stepperSubmit();
         setActiveStepIndex(newStepIndex);
       }
     },
-    [isFormValid]
+    [submitButtonRefs, isFormValid]
   );
 
   const handleStepSubmit = useCallback(
@@ -89,7 +81,6 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
 
   const stepsContextValue = useMemo(
     () => ({
-      // submitRef,
       activeStepIndex,
       reportStepValidity,
       handleStepSubmit,

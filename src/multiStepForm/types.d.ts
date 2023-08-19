@@ -1,8 +1,13 @@
+type MultiStepFormSubmitButtonRefProps = {
+  disabled: boolean;
+  stepperSubmit: () => void;
+};
+
 declare namespace ReactContextRefs {
   export interface Refs {
     submitButton: {
-      current: MultiStepFormSubmitButtonRefProps;
-      meta: { disabled: boolean; onSubmit: () => void; test: () => void };
+      current: HTMLBUttonElement & MultiStepFormSubmitButtonRefProps;
+      meta: MultiStepFormSubmitButtonRefProps;
     };
   }
 }

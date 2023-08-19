@@ -16,6 +16,7 @@ import {
   MultiStepFormStepperContext,
   MultiStepFormStepsContext,
 } from "./MultiStepFormContext";
+import { MultiStepFormSubmitButtonRefProps } from "./SubmitButton";
 
 export type MultiStepFormProps<ParentFormData extends FieldValues> = {
   submitOnStepChange?: boolean;
@@ -36,33 +37,34 @@ function MultiStepForm<ParentFormData extends FieldValues>({
   const numSteps = arrayStepChildren.length - (includesStepper ? 1 : 0);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
-  const submitRef = useRef<HTMLInputElement>(null);
-  const onSubmitStep = useCallback(() => submitRef.current?.click(), []);
+  const submitRef = useRef<MultiStepFormSubmitButtonRefProps>(null);
+  const onSubmitStep = (afterSubmit: () => void) => {
+    submitRef.current?.onSubmit(afterSubmit);
+  };
 
   const onChangeStep = useCallback(
     (newStepIndex: number) => {
       if (isFormValid) {
-        if (submitOnStepChange) {
-          // call ref to submit button on step change
-          onSubmitStep();
-        }
+        onSubmitStep(() => setActiveStepIndex(newStepIndex));
         setActiveStepIndex(newStepIndex);
       }
     },
     [isFormValid]
   );
-  const reportStepValidity = useCallback(
-    (isFormStepValid: boolean) => setIsFormValid(isFormStepValid),
-    []
-  );
+
   const handleStepSubmit = useCallback(
     <T,>(onFormSubmit: (formData: T) => void) => {
       return (formData: T) => {
         onFormSubmit(formData);
-        onChangeStep(Math.min(activeStepIndex + 1, numSteps - 1));
+        setActiveStepIndex(Math.min(activeStepIndex + 1, numSteps - 1));
       };
     },
-    [activeStepIndex, arrayStepChildren]
+    [submitOnStepChange, activeStepIndex, arrayStepChildren]
+  );
+
+  const reportStepValidity = useCallback(
+    (isFormStepValid: boolean) => setIsFormValid(isFormStepValid),
+    []
   );
 
   const stepsContextValue = useMemo(
@@ -93,13 +95,12 @@ function MultiStepForm<ParentFormData extends FieldValues>({
             const item = child as ReactElement<
               PropsWithChildren<
                 MultiStepFormStepProps<ParentFormData> &
-                  RefAttributes<HTMLInputElement>
+                  RefAttributes<MultiStepFormSubmitButtonRefProps>
               >
             >;
             switch (item.type) {
               case MultiStepFormStep:
                 return cloneElement(item, {
-                  ref: submitRef,
                   formStepIndex: includesStepper ? index - 1 : index,
                 });
               case MultiStepFormStepper:

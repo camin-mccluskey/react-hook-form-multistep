@@ -1,6 +1,8 @@
-import { createContext, useContext } from "react";
+import { ForwardedRef, createContext, useContext } from "react";
+import { MultiStepFormSubmitButtonRefProps } from "./SubmitButton";
 
 type MultiStepFormStepsContextProps = {
+  submitRef: ForwardedRef<MultiStepFormSubmitButtonRefProps>;
   activeStepIndex: number;
   reportStepValidity: (isFormStepValid: boolean) => void;
   handleStepSubmit: <T>(
@@ -10,6 +12,7 @@ type MultiStepFormStepsContextProps = {
 
 export const MultiStepFormStepsContext =
   createContext<MultiStepFormStepsContextProps>({
+    submitRef: null,
     activeStepIndex: 0,
     reportStepValidity: (_: boolean) => undefined,
     handleStepSubmit:

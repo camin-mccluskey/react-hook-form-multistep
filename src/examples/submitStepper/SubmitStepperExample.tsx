@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import MultiStepForm from "../../multiStepForm/MultiStepForm";
 import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
 import { DeepPartial } from "react-hook-form";
+import TestRef from "./TestRef";
 
 export type ExampleFormData = {
   firstName: string;
@@ -51,9 +52,8 @@ export default function SubmitStepperExample() {
     <MultiStepForm submitOnStepChange>
       <MultiStepForm.Stepper />
       <MultiStepForm.Step
-        renderStepForm={({ reportStepValidity, handleStepSubmit, ref }) => (
+        renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepOne
-            ref={ref}
             data={store}
             onSubmit={handleStepSubmit(onSubmitStepOne)}
             reportValidity={reportStepValidity}

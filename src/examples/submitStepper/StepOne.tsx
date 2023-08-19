@@ -2,6 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DeepPartial, useForm } from "react-hook-form";
 import { z } from "zod";
 import { ForwardedRef, forwardRef, useEffect } from "react";
+import SubmitButton, {
+  MultiStepFormSubmitButtonRefProps,
+} from "../../multiStepForm/SubmitButton";
 
 const stepOneSchema = z.object({
   firstName: z.string().min(3),
@@ -19,7 +22,7 @@ export type StepOneProps = {
 
 const StepOne = forwardRef(function StepOne(
   { data, onSubmit, reportValidity, title }: StepOneProps,
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<MultiStepFormSubmitButtonRefProps>
 ) {
   const methods = useForm<StepOneFormData>({
     defaultValues: data,
@@ -56,7 +59,12 @@ const StepOne = forwardRef(function StepOne(
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.lastName?.message}
       </p>
-      <input type="submit" title="submit" disabled={!isValid} ref={ref} />
+      {/*<input type="submit" title="submit" disabled={!isValid} ref={ref} /> */}
+      <SubmitButton
+        onSubmit={handleSubmit(onSubmit)}
+        disabled={!isValid}
+        ref={ref}
+      />
     </form>
   );
 });

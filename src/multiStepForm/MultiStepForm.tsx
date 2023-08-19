@@ -3,11 +3,9 @@ import {
   Children,
   PropsWithChildren,
   ReactElement,
-  RefAttributes,
   cloneElement,
   useCallback,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import MultiStepFormStep, { MultiStepFormStepProps } from "./MultiStepFormStep";
@@ -16,7 +14,7 @@ import {
   MultiStepFormStepperContext,
   MultiStepFormStepsContext,
 } from "./MultiStepFormContext";
-import { MultiStepFormSubmitButtonRefProps } from "./SubmitButton";
+import { RefProvider, useRefs } from "react-context-refs";
 
 export type MultiStepFormProps<ParentFormData extends FieldValues> = {
   submitOnStepChange?: boolean;
@@ -26,6 +24,19 @@ export type MultiStepFormProps<ParentFormData extends FieldValues> = {
 };
 
 function MultiStepForm<ParentFormData extends FieldValues>({
+  submitOnStepChange,
+  children,
+}: MultiStepFormProps<ParentFormData>) {
+  return (
+    <RefProvider>
+      <MultiStepFormContent submitOnStepChange={submitOnStepChange}>
+        {children}
+      </MultiStepFormContent>
+    </RefProvider>
+  );
+}
+
+function MultiStepFormContent<ParentFormData extends FieldValues>({
   submitOnStepChange = false,
   children,
 }: MultiStepFormProps<ParentFormData>) {
@@ -41,13 +52,20 @@ function MultiStepForm<ParentFormData extends FieldValues>({
   // const onSubmitStep = (afterSubmit: () => void) => {
   //   submitRef.current?.onSubmit(afterSubmit);
   // };
+  const submitButtonRefs = useRefs("submitButton");
+  console.log(submitButtonRefs.length);
+  if (submitButtonRefs.length > 1) {
+    throw new Error("MultiStepForm must have exactly 1 submit button active.");
+  }
+  // const submitButtonRef = submitButtonRefs.at(0)?.current?.click();
+  console.log(submitButtonRefs);
 
   const onChangeStep = useCallback(
     (newStepIndex: number) => {
       if (isFormValid) {
-        // onSubmitStep(() => setActiveStepIndex(newStepIndex));
-        // handleStepSubmit()
-        // TODO: submit current step using ref (actually imperative ref)
+        // TODO: confirm there is only ever 1 submit button active)
+        console.log(submitButtonRefs);
+        console.log(submitButtonRefs.at(0)?.current.disabled);
         setActiveStepIndex(newStepIndex);
       }
     },

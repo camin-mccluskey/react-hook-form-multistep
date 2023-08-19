@@ -1,13 +1,7 @@
-import {
-  ForwardedRef,
-  ReactElement,
-  ReactNode,
-  RefAttributes,
-  forwardRef,
-} from "react";
+import { ReactElement, ReactNode } from "react";
 import { DeepPartial, FieldValues } from "react-hook-form";
 import { useMultiStepFormContext } from "./MultiStepFormContext";
-import { MultiStepFormSubmitButtonRefProps } from "./SubmitButton";
+import { useRefs } from "react-context-refs";
 
 type FormStepBaseProps<StepFormData extends FieldValues> = {
   data?: DeepPartial<StepFormData>;

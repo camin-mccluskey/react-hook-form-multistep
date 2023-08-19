@@ -1,6 +1,6 @@
 type MultiStepFormSubmitButtonRefProps = {
   disabled: boolean;
-  stepperSubmit: () => void;
+  stepperSubmit: (nextStepIndex: number) => void;
 };
 
 declare namespace ReactContextRefs {

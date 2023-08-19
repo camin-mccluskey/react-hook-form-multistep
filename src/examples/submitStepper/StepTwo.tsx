@@ -1,16 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DeepPartial, useForm } from "react-hook-form";
 import { z } from "zod";
-import {
-  ForwardedRef,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from "react";
-import SubmitButton, {
-  MultiStepFormSubmitButtonRefProps,
-} from "../../multiStepForm/SubmitButton";
+import { BaseSyntheticEvent, useEffect } from "react";
+import SubmitButton from "../../multiStepForm/SubmitButton";
 
 const stepTwoSchema = z.object({
   address: z.object({
@@ -23,7 +15,12 @@ export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
 
 type StepTwoProps = {
   data?: DeepPartial<StepTwoFormData>;
-  onSubmit: (formData: StepTwoFormData) => void;
+  onSubmit: (
+    formData: StepTwoFormData,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    event?: BaseSyntheticEvent<object, any, any>,
+    nextStepIndex?: number
+  ) => void;
   reportValidity: (isValid: boolean) => void;
 };
 
@@ -47,6 +44,16 @@ export default function StepTwo({
     reportValidity(isValid);
   }, [isValid]);
 
+  // TODO: move this to a hook probbably
+  const customSubmit = (nextStepIndex?: number) => {
+    return handleSubmit(
+      (data, e) => onSubmit(data, e, nextStepIndex),
+      (errors) => {
+        console.log("errors", errors);
+      }
+    )();
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -66,11 +73,7 @@ export default function StepTwo({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.address?.countryCode?.message}
       </p>
-      <SubmitButton
-        onSubmit={handleSubmit(onSubmit)}
-        disabled={!isValid}
-        // ref={ref}
-      />
+      <SubmitButton onSubmit={customSubmit} disabled={!isValid} />
     </form>
   );
 }

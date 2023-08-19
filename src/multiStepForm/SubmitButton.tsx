@@ -1,7 +1,7 @@
 import { useContextRef } from "react-context-refs";
 
 type SubmitButtonProps = {
-  onSubmit: () => void;
+  onSubmit: (nextStepIndex?: number) => void;
   disabled: boolean;
 };
 
@@ -11,7 +11,11 @@ export default function SubmitButton({
 }: SubmitButtonProps) {
   const submitButtonRef = useContextRef("submitButton", {
     disabled,
-    stepperSubmit: onSubmit,
+    stepperSubmit: (nextStepIndex: number) => {
+      console.log("called imperative stepperSubmit", nextStepIndex);
+      console.log(onSubmit(nextStepIndex));
+      onSubmit(nextStepIndex);
+    },
   });
 
   return (

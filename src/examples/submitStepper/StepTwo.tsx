@@ -27,10 +27,11 @@ type StepTwoProps = {
   reportValidity: (isValid: boolean) => void;
 };
 
-const StepTwo = forwardRef(function StepTwo(
-  { data, onSubmit, reportValidity }: StepTwoProps,
-  ref: ForwardedRef<MultiStepFormSubmitButtonRefProps>
-) {
+export default function StepTwo({
+  data,
+  onSubmit,
+  reportValidity,
+}: StepTwoProps) {
   const methods = useForm<StepTwoFormData>({
     defaultValues: data,
     mode: "all",
@@ -68,11 +69,8 @@ const StepTwo = forwardRef(function StepTwo(
       <SubmitButton
         onSubmit={handleSubmit(onSubmit)}
         disabled={!isValid}
-        ref={ref}
+        // ref={ref}
       />
     </form>
   );
-});
-
-StepTwo.displayName = "StepTwo";
-export default StepTwo;
+}

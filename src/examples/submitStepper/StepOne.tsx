@@ -20,10 +20,12 @@ export type StepOneProps = {
   title: string;
 };
 
-const StepOne = forwardRef(function StepOne(
-  { data, onSubmit, reportValidity, title }: StepOneProps,
-  ref: ForwardedRef<MultiStepFormSubmitButtonRefProps>
-) {
+export default function StepOne({
+  data,
+  onSubmit,
+  reportValidity,
+  title,
+}: StepOneProps) {
   const methods = useForm<StepOneFormData>({
     defaultValues: data,
     mode: "all",
@@ -59,15 +61,11 @@ const StepOne = forwardRef(function StepOne(
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.lastName?.message}
       </p>
-      {/*<input type="submit" title="submit" disabled={!isValid} ref={ref} /> */}
       <SubmitButton
         onSubmit={handleSubmit(onSubmit)}
         disabled={!isValid}
-        ref={ref}
+        // ref={ref}
       />
     </form>
   );
-});
-
-StepOne.displayName = "StepOne";
-export default StepOne;
+}

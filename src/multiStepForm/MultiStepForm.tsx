@@ -37,15 +37,17 @@ function MultiStepForm<ParentFormData extends FieldValues>({
   const numSteps = arrayStepChildren.length - (includesStepper ? 1 : 0);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
-  const submitRef = useRef<MultiStepFormSubmitButtonRefProps>(null);
-  const onSubmitStep = (afterSubmit: () => void) => {
-    submitRef.current?.onSubmit(afterSubmit);
-  };
+  // const submitRef = useRef<MultiStepFormSubmitButtonRefProps>(null);
+  // const onSubmitStep = (afterSubmit: () => void) => {
+  //   submitRef.current?.onSubmit(afterSubmit);
+  // };
 
   const onChangeStep = useCallback(
     (newStepIndex: number) => {
       if (isFormValid) {
-        onSubmitStep(() => setActiveStepIndex(newStepIndex));
+        // onSubmitStep(() => setActiveStepIndex(newStepIndex));
+        // handleStepSubmit()
+        // TODO: submit current step using ref (actually imperative ref)
         setActiveStepIndex(newStepIndex);
       }
     },
@@ -69,12 +71,12 @@ function MultiStepForm<ParentFormData extends FieldValues>({
 
   const stepsContextValue = useMemo(
     () => ({
-      submitRef,
+      // submitRef,
       activeStepIndex,
       reportStepValidity,
       handleStepSubmit,
     }),
-    [submitRef, activeStepIndex, reportStepValidity, handleStepSubmit]
+    [activeStepIndex, reportStepValidity, handleStepSubmit]
   );
 
   const stepperContextValue = useMemo(
@@ -93,10 +95,7 @@ function MultiStepForm<ParentFormData extends FieldValues>({
         <div style={{ height: "100%", width: "100%" }}>
           {Children.map(arrayStepChildren, (child, index) => {
             const item = child as ReactElement<
-              PropsWithChildren<
-                MultiStepFormStepProps<ParentFormData> &
-                  RefAttributes<MultiStepFormSubmitButtonRefProps>
-              >
+              PropsWithChildren<MultiStepFormStepProps<ParentFormData>>
             >;
             switch (item.type) {
               case MultiStepFormStep:

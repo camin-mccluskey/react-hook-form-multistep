@@ -15,8 +15,7 @@ export type StepOneProps = {
   data?: DeepPartial<StepOneFormData>;
   onSubmit: (
     formData: StepOneFormData,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    event?: BaseSyntheticEvent<object, any, any>,
+    event?: BaseSyntheticEvent,
     nextStepIndex?: number
   ) => void;
   reportValidity: (isValid: boolean) => void;

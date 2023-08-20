@@ -42,8 +42,7 @@ type StepThreeProps = {
   data?: DeepPartial<StepThreeFormData>;
   onSubmit: (
     formData: StepThreeFormData,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    event?: BaseSyntheticEvent<object, any, any>,
+    event?: BaseSyntheticEvent,
     nextStepIndex?: number
   ) => void;
   reportValidity: (isValid: boolean) => void;
@@ -118,14 +117,12 @@ export default function StepThree({
         <input
           type="radio"
           {...register("other.handedness")}
-          // name="handedness"
           value={Handedness.LEFT}
         />
         <label>Left</label>
         <input
           type="radio"
           {...register("other.handedness")}
-          // name="handedness"
           value={Handedness.RIGHT}
         />
         <label>Right</label>
@@ -153,7 +150,10 @@ export default function StepThree({
           <button onClick={() => remove(index)}>Remove</button>
         </div>
       ))}
-      <button onClick={() => append({ name: "", type: Animal.DOG })}>
+      <button
+        type="button"
+        onClick={() => append({ name: "", type: Animal.DOG })}
+      >
         Add a pet
       </button>
       <SubmitButton onSubmit={customSubmit} disabled={!isValid} />

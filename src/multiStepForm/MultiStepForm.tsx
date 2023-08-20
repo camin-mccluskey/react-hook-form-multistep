@@ -51,6 +51,7 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
   const onChangeStep = useCallback(
     (newStepIndex: number) => {
       if (isFormValid) {
+        console.log("submitting form from stepper", submitButtonRefs);
         submitButtonRefs.at(0)?.meta?.stepperSubmit(newStepIndex);
         // this is necessary (even though the above will navigate) to ensure form steps w/o submit buttons are navigated
         setActiveStepIndex(newStepIndex);
@@ -63,7 +64,7 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
     <T,>(onFormSubmit: (formData: T) => void) => {
       return (
         formData: T,
-        event?: React.BaseSyntheticEvent<object, any, any>,
+        event?: React.BaseSyntheticEvent,
         nextStepIndex = Math.min(activeStepIndex + 1, numSteps - 1)
       ) => {
         onFormSubmit(formData);

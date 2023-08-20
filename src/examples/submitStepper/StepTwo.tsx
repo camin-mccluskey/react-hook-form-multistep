@@ -1,8 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DeepPartial, useForm } from "react-hook-form";
 import { z } from "zod";
-import { BaseSyntheticEvent, useEffect } from "react";
+import { useEffect } from "react";
 import SubmitButton from "../../multiStepForm/SubmitButton";
+import { FormStepOnSubmit } from "../../multiStepForm/types";
 
 const stepTwoSchema = z.object({
   address: z.object({
@@ -15,11 +16,7 @@ export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
 
 type StepTwoProps = {
   data?: DeepPartial<StepTwoFormData>;
-  onSubmit: (
-    formData: StepTwoFormData,
-    event?: BaseSyntheticEvent,
-    nextStepIndex?: number
-  ) => void;
+  onSubmit: FormStepOnSubmit;
   reportValidity: (isValid: boolean) => void;
 };
 
@@ -43,16 +40,6 @@ export default function StepTwo({
     reportValidity(isValid);
   }, [isValid]);
 
-  // TODO: move this to a hook probbably
-  const customSubmit = (nextStepIndex?: number) => {
-    return handleSubmit(
-      (data, e) => onSubmit(data, e, nextStepIndex),
-      (errors) => {
-        console.log("errors", errors);
-      }
-    )();
-  };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -72,7 +59,11 @@ export default function StepTwo({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.address?.countryCode?.message}
       </p>
-      <SubmitButton onSubmit={customSubmit} disabled={!isValid} />
+      <SubmitButton
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        disabled={!isValid}
+      />
     </form>
   );
 }

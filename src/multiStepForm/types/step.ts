@@ -1,9 +1,15 @@
-import { ReactElement } from "react";
+import { BaseSyntheticEvent, ReactElement } from "react";
 import { DeepPartial, FieldValues } from "react-hook-form";
+
+export type FormStepOnSubmit = <StepFormData extends FieldValues>(
+  formData: StepFormData,
+  event?: BaseSyntheticEvent,
+  nextStepIndex?: number
+) => void;
 
 export type FormStepBaseProps<StepFormData extends FieldValues> = {
   data?: DeepPartial<StepFormData>;
-  onSubmit: (formData: StepFormData) => void;
+  onSubmit: FormStepOnSubmit;
   reportValidity: (isValid: boolean) => void;
 };
 

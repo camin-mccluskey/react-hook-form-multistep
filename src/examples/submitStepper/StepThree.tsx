@@ -6,8 +6,9 @@ import {
   useForm,
 } from "react-hook-form";
 import { z } from "zod";
-import { BaseSyntheticEvent, useEffect } from "react";
+import { useEffect } from "react";
 import SubmitButton from "../../multiStepForm/SubmitButton";
+import { FormStepOnSubmit } from "../../multiStepForm/types";
 
 export const Animal = {
   DOG: "DOG",
@@ -40,11 +41,7 @@ export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
 
 type StepThreeProps = {
   data?: DeepPartial<StepThreeFormData>;
-  onSubmit: (
-    formData: StepThreeFormData,
-    event?: BaseSyntheticEvent,
-    nextStepIndex?: number
-  ) => void;
+  onSubmit: FormStepOnSubmit;
   reportValidity: (isValid: boolean) => void;
 };
 
@@ -77,16 +74,6 @@ export default function StepThree({
   useEffect(() => {
     reportValidity(isValid);
   }, [isValid]);
-
-  // TODO: move this to a hook probbably
-  const customSubmit = (nextStepIndex?: number) => {
-    return handleSubmit(
-      (data, e) => onSubmit(data, e, nextStepIndex),
-      (errors) => {
-        console.log("errors", errors);
-      }
-    )();
-  };
 
   return (
     <form
@@ -156,7 +143,11 @@ export default function StepThree({
       >
         Add a pet
       </button>
-      <SubmitButton onSubmit={customSubmit} disabled={!isValid} />
+      <SubmitButton
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        disabled={!isValid}
+      />
     </form>
   );
 }

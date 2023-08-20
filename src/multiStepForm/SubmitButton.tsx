@@ -1,20 +1,26 @@
 import { useContextRef } from "react-context-refs";
+import useMultiStepSubmit from "./useMultiStepSubmit";
+import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
+import { FormStepOnSubmit } from "./types";
 
-type SubmitButtonProps = {
+type SubmitButtonProps<StepFormData extends FieldValues> = {
   label?: string;
-  onSubmit: (nextStepIndex?: number) => void;
+  handleSubmit: UseFormHandleSubmit<StepFormData>;
+  onSubmit: FormStepOnSubmit;
   disabled: boolean;
 };
 
-export default function SubmitButton({
+export default function SubmitButton<StepFormData extends FieldValues>({
   label = "Next",
+  handleSubmit,
   onSubmit,
   disabled,
-}: SubmitButtonProps) {
+}: SubmitButtonProps<StepFormData>) {
+  const multiStepOnSubmit = useMultiStepSubmit({ handleSubmit, onSubmit });
   const submitButtonRef = useContextRef("submitButton", {
     disabled,
     stepperSubmit: (nextStepIndex: number) => {
-      onSubmit(nextStepIndex);
+      multiStepOnSubmit(nextStepIndex);
     },
   });
 

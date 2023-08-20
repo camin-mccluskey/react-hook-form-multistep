@@ -22,7 +22,7 @@ type MultiStepFormStepperContextProps = {
   numSteps: number;
   activeStepIndex: number;
   onChangeStep: (newStepIndex: number) => void;
-  canStep: boolean;
+  steppingDisabled: boolean;
 };
 
 export const MultiStepFormStepperContext =
@@ -30,7 +30,7 @@ export const MultiStepFormStepperContext =
     numSteps: 0,
     activeStepIndex: 0,
     onChangeStep: (_: number) => undefined,
-    canStep: false,
+    steppingDisabled: true,
   });
 
 export function useMultiStepFormContext() {

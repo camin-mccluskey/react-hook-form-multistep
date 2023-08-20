@@ -29,7 +29,7 @@ const stepThreeSchema = z.object({
     handedness: z.string(),
     pets: z.array(
       z.object({
-        name: z.string(),
+        name: z.string().min(1),
         type: z.nativeEnum(Animal),
       })
     ),

@@ -1,15 +1,15 @@
-type StepperProps = {
+type BasicStepperProps = {
   numSteps: number;
   currentStepIndex: number;
-  disabledStepping: boolean;
+  steppingDisabled: boolean;
   onChangeStep: (stepIdx: number) => void;
 };
-export default function Stepper({
+export default function BasicStepper({
   numSteps,
   currentStepIndex,
-  disabledStepping,
+  steppingDisabled,
   onChangeStep,
-}: StepperProps) {
+}: BasicStepperProps) {
   const widthPc = (100 / numSteps).toFixed();
   return (
     <div
@@ -31,9 +31,9 @@ export default function Stepper({
             backgroundColor:
               index === currentStepIndex
                 ? "blue"
-                : disabledStepping
-                ? "gray "
-                : "black",
+                : steppingDisabled
+                ? "black"
+                : "gray",
           }}
           onClick={() => onChangeStep(index)}
         />

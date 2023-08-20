@@ -53,14 +53,19 @@ export default function StepThree({
   const methods = useForm<StepThreeFormData>({
     defaultValues: data,
     mode: "all",
+    reValidateMode: "onChange",
     resolver: zodResolver(stepThreeSchema),
   });
   const {
     handleSubmit,
     register,
     control,
+    watch,
     formState: { errors, isValid },
   } = methods;
+
+  console.log(errors);
+  console.log(watch);
 
   const {
     fields: pets,
@@ -87,6 +92,7 @@ export default function StepThree({
       <label>Favourite animal</label>
       <Controller
         control={control}
+        defaultValue={Animal.DOG}
         name="other.favouriteAnimal"
         render={({ field: { value, onChange } }) => (
           <AnimalSelector
@@ -126,6 +132,7 @@ export default function StepThree({
           <Controller
             control={control}
             name={`other.pets.${index}.type`}
+            defaultValue={Animal.CAT}
             render={({ field: { value, onChange } }) => (
               <AnimalSelector
                 value={value}

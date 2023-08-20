@@ -59,8 +59,6 @@ export default function SubmitStepperExample() {
     }));
   };
 
-  // arguably this should function exactly the same as the other steps
-  // i.e. the review step should do a final validation on submit
   const onFinalSubmit = (data: DeepPartial<ExampleFormData>) => {
     console.log("persisting to db: ", data);
   };
@@ -101,6 +99,7 @@ export default function SubmitStepperExample() {
         )}
       />
       <MultiStepForm.Step
+        name="Review"
         renderStepForm={({ handleStepSubmit }) => (
           <Review data={store} onSubmit={handleStepSubmit(onFinalSubmit)} />
         )}

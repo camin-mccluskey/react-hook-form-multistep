@@ -32,9 +32,8 @@ export default function StepOne({
   });
   const {
     handleSubmit,
-    control,
     register,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = methods;
 
   useEffect(() => {
@@ -61,7 +60,7 @@ export default function StepOne({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.lastName?.message}
       </p>
-      <input type="submit" title="submit" disabled={!isValid} />
+      <input type="submit" value="Next" disabled={!isValid} />
     </form>
   );
 }

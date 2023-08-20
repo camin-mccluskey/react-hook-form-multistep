@@ -1,3 +1,5 @@
+import { FormStep } from "../../multiStepForm/types";
+
 type CustomStepperProps = {
   formSteps: FormStep[];
   activeStepIndex: number;

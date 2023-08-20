@@ -30,8 +30,7 @@ export default function StepTwo({
   const {
     handleSubmit,
     register,
-    control,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = methods;
 
   useEffect(() => {
@@ -57,7 +56,7 @@ export default function StepTwo({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.address?.countryCode?.message}
       </p>
-      <input type="submit" title="submit" disabled={!isValid} />
+      <input type="submit" value="Next" disabled={!isValid} />
     </form>
   );
 }

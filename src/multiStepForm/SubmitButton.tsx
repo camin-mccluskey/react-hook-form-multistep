@@ -1,11 +1,13 @@
 import { useContextRef } from "react-context-refs";
 
 type SubmitButtonProps = {
+  label?: string;
   onSubmit: (nextStepIndex?: number) => void;
   disabled: boolean;
 };
 
 export default function SubmitButton({
+  label = "Next",
   onSubmit,
   disabled,
 }: SubmitButtonProps) {
@@ -18,7 +20,7 @@ export default function SubmitButton({
 
   return (
     <button type="submit" disabled={disabled} ref={submitButtonRef}>
-      Submit
+      {label}
     </button>
   );
 }

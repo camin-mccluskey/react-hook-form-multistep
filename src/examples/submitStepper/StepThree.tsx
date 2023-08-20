@@ -32,7 +32,7 @@ const stepThreeSchema = z.object({
   }),
 });
 
-export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
+export type StepThreeFormData = z.input<typeof stepThreeSchema>;
 
 type StepThreeProps = {
   data?: Partial<StepThreeFormData>;

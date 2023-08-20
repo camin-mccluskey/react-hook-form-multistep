@@ -8,7 +8,7 @@ const stepOneSchema = z.object({
   lastName: z.string().min(3),
 });
 
-export type StepOneFormData = z.infer<typeof stepOneSchema>;
+export type StepOneFormData = z.input<typeof stepOneSchema>;
 
 // every step takes these exact props
 export type StepOneProps = {

@@ -4,14 +4,7 @@ import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
 
-export type ExampleFormData = {
-  firstName: string;
-  lastName: string;
-  address: {
-    street: string;
-    countryCode?: string;
-  };
-};
+export type ExampleFormData = StepOneFormData & StepTwoFormData;
 
 const exampleData: ExampleFormData = {
   firstName: "Camin",

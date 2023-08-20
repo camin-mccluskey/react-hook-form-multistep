@@ -10,7 +10,7 @@ const stepTwoSchema = z.object({
   }),
 });
 
-export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
+export type StepTwoFormData = z.input<typeof stepTwoSchema>;
 
 type StepTwoProps = {
   data?: Partial<StepTwoFormData>;

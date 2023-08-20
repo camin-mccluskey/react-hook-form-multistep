@@ -1,4 +1,3 @@
-import { DeepPartial } from "react-hook-form";
 import { ExampleFormData } from "./BasicExample";
 
 type ReviewProps = {

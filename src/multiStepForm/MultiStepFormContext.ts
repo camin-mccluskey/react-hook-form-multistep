@@ -1,15 +1,11 @@
 import { createContext, useContext } from "react";
-
-type MultiStepFormStepsContextProps = {
-  activeStepIndex: number;
-  reportStepValidity: (isFormStepValid: boolean) => void;
-  handleStepSubmit: <T>(
-    onFormStepSubmit: (formStepData: T) => void
-  ) => (formStepData: T) => void;
-};
+import {
+  MultiStepFormStepperContextFields,
+  MultiStepFormStepsContextFields,
+} from "./types";
 
 export const MultiStepFormStepsContext =
-  createContext<MultiStepFormStepsContextProps>({
+  createContext<MultiStepFormStepsContextFields>({
     activeStepIndex: 0,
     reportStepValidity: (_: boolean) => undefined,
     handleStepSubmit:
@@ -18,19 +14,12 @@ export const MultiStepFormStepsContext =
         onFormStepSubmit(formStepData),
   });
 
-type MultiStepFormStepperContextProps = {
-  numSteps: number;
-  activeStepIndex: number;
-  onChangeStep: (newStepIndex: number) => void;
-  canStep: boolean;
-};
-
 export const MultiStepFormStepperContext =
-  createContext<MultiStepFormStepperContextProps>({
-    numSteps: 0,
+  createContext<MultiStepFormStepperContextFields>({
+    formSteps: [],
     activeStepIndex: 0,
     onChangeStep: (_: number) => undefined,
-    canStep: false,
+    steppingDisabled: true,
   });
 
 export function useMultiStepFormContext() {

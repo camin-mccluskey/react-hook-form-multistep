@@ -1,20 +1,19 @@
-import { useRef, useState } from "react";
-import MultiStepForm from "../../multiStepForm/MultiStepForm";
+import { useState } from "react";
+import MultiStepForm from "../../multiStepForm";
 import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
-import { DeepPartial } from "react-hook-form";
-import TestRef from "./TestRef";
+import StepThree, { Animal, Handedness, StepThreeFormData } from "./StepThree";
+import CustomStepper from "./CustomerStepper";
 
-export type ExampleFormData = {
-  firstName: string;
-  lastName: string;
-  address: {
-    street: string;
-    countryCode?: string;
-  };
-};
+/** This is a contrived example to demonstrate how to use the MultiStepForm component */
+/** Set up some types for the data we will manipulate in the form */
 
+export type ExampleFormData = StepOneFormData &
+  StepTwoFormData &
+  StepThreeFormData;
+
+/** Set up some example data to populate the form initially. This is not necessary but it does demonstrate how the form can be used to both create and edit data */
 const exampleData: ExampleFormData = {
   firstName: "Camin",
   lastName: "McCluskey",
@@ -22,11 +21,23 @@ const exampleData: ExampleFormData = {
     street: "14 Random Road",
     countryCode: "GB",
   },
+  other: {
+    favouriteAnimal: Animal.CAT,
+    handedness: Handedness.LEFT,
+    pets: [
+      {
+        name: "Fluffy",
+        type: Animal.CAT,
+      },
+    ],
+  },
 };
 
 export default function SubmitStepperExample() {
   // store is the scratchpad for the child forms to play around with
-  const [store, setStore] = useState<DeepPartial<ExampleFormData>>(exampleData); // this data will actually be a prop or network call
+  const [store, setStore] = useState<Partial<ExampleFormData>>(
+    exampleData ?? {}
+  ); // this data will actually be a prop or network call
 
   const onSubmitStepOne = (data: StepOneFormData) => {
     setStore((prev) => ({
@@ -42,16 +53,24 @@ export default function SubmitStepperExample() {
     }));
   };
 
-  // arguably this should function exactly the same as the other steps
-  // i.e. the review step should do a final validation on submit
-  const onFinalSubmit = (data: DeepPartial<ExampleFormData>) => {
+  const onSubmitStepThree = (data: StepThreeFormData) => {
+    setStore((prev) => ({
+      ...prev,
+      ...data,
+    }));
+  };
+
+  const onFinalSubmit = (data: Partial<ExampleFormData>) => {
     console.log("persisting to db: ", data);
   };
 
   return (
-    <MultiStepForm submitOnStepChange>
-      <MultiStepForm.Stepper />
+    <MultiStepForm>
+      <MultiStepForm.Stepper
+        render={(stepperProps) => CustomStepper(stepperProps)}
+      />
       <MultiStepForm.Step
+        name="Step 1"
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepOne
             data={store}
@@ -62,6 +81,7 @@ export default function SubmitStepperExample() {
         )}
       />
       <MultiStepForm.Step
+        name="Step 2"
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepTwo
             data={store}
@@ -71,6 +91,16 @@ export default function SubmitStepperExample() {
         )}
       />
       <MultiStepForm.Step
+        renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
+          <StepThree
+            data={store}
+            onSubmit={handleStepSubmit(onSubmitStepThree)}
+            reportValidity={reportStepValidity}
+          />
+        )}
+      />
+      <MultiStepForm.Step
+        name="Review"
         renderStepForm={({ handleStepSubmit }) => (
           <Review data={store} onSubmit={handleStepSubmit(onFinalSubmit)} />
         )}

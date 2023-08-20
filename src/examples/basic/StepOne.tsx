@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DeepPartial, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect } from "react";
 
@@ -8,11 +8,11 @@ const stepOneSchema = z.object({
   lastName: z.string().min(3),
 });
 
-export type StepOneFormData = z.infer<typeof stepOneSchema>;
+export type StepOneFormData = z.input<typeof stepOneSchema>;
 
 // every step takes these exact props
 export type StepOneProps = {
-  data?: DeepPartial<StepOneFormData>;
+  data?: Partial<StepOneFormData>;
   onSubmit: (formData: StepOneFormData) => void;
   reportValidity: (isValid: boolean) => void;
   // testing we can pass arbitrary props
@@ -32,9 +32,8 @@ export default function StepOne({
   });
   const {
     handleSubmit,
-    control,
     register,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = methods;
 
   useEffect(() => {
@@ -61,7 +60,7 @@ export default function StepOne({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.lastName?.message}
       </p>
-      <input type="submit" title="submit" disabled={!isValid} />
+      <input type="submit" value="Next" disabled={!isValid} />
     </form>
   );
 }

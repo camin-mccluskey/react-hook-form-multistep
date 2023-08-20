@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DeepPartial, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect } from "react";
 
@@ -10,10 +10,10 @@ const stepTwoSchema = z.object({
   }),
 });
 
-export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
+export type StepTwoFormData = z.input<typeof stepTwoSchema>;
 
 type StepTwoProps = {
-  data?: DeepPartial<StepTwoFormData>;
+  data?: Partial<StepTwoFormData>;
   onSubmit: (formData: StepTwoFormData) => void;
   reportValidity: (isValid: boolean) => void;
 };
@@ -30,11 +30,8 @@ export default function StepTwo({
   const {
     handleSubmit,
     register,
-    control,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = methods;
-
-  console.log("step 2 errors", errors);
 
   useEffect(() => {
     reportValidity(isValid);
@@ -59,7 +56,7 @@ export default function StepTwo({
       <p style={{ fontSize: "10px", color: "red" }}>
         {errors.address?.countryCode?.message}
       </p>
-      <input type="submit" title="submit" disabled={!isValid} />
+      <input type="submit" value="Next" disabled={!isValid} />
     </form>
   );
 }

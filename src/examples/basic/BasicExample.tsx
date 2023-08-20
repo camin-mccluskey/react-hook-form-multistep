@@ -3,16 +3,8 @@ import MultiStepForm from "../../multiStepForm/MultiStepForm";
 import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
-import { DeepPartial } from "react-hook-form";
 
-export type ExampleFormData = {
-  firstName: string;
-  lastName: string;
-  address: {
-    street: string;
-    countryCode?: string;
-  };
-};
+export type ExampleFormData = StepOneFormData & StepTwoFormData;
 
 const exampleData: ExampleFormData = {
   firstName: "Camin",
@@ -25,7 +17,7 @@ const exampleData: ExampleFormData = {
 
 export default function BasicExample() {
   // store is the scratchpad for the child forms to play around with
-  const [store, setStore] = useState<DeepPartial<ExampleFormData>>(exampleData); // this data will actually be a prop or network call
+  const [store, setStore] = useState<Partial<ExampleFormData>>(exampleData); // this data will actually be a prop or network call
 
   const onSubmitStepOne = (data: StepOneFormData) => {
     setStore((prev) => ({
@@ -41,15 +33,12 @@ export default function BasicExample() {
     }));
   };
 
-  // arguably this should function exactly the same as the other steps
-  // i.e. the review step should do a final validation on submit
-  const onFinalSubmit = (data: DeepPartial<ExampleFormData>) => {
+  const onFinalSubmit = (data: Partial<ExampleFormData>) => {
     console.log("persisting to db: ", data);
   };
 
   return (
     <MultiStepForm>
-      <MultiStepForm.Stepper />
       <MultiStepForm.Step
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepOne

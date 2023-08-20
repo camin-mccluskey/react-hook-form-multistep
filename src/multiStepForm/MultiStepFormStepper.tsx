@@ -1,16 +1,30 @@
 import { useMultiStepFormContext } from "./MultiStepFormContext";
 import Stepper from "./Stepper";
+import { MultiStepFormStepperContextFields } from "./types";
 
-export default function MultiStepFormStepper() {
-  const {
-    stepperContext: { numSteps, activeStepIndex, onChangeStep, canStep },
-  } = useMultiStepFormContext();
-  return (
+type MultiStepFormStepperProps = {
+  render?: ({
+    formSteps,
+    activeStepIndex,
+    onChangeStep,
+    steppingDisabled,
+  }: MultiStepFormStepperContextFields) => JSX.Element;
+};
+
+export default function MultiStepFormStepper({
+  render,
+}: MultiStepFormStepperProps) {
+  const { stepperContext } = useMultiStepFormContext();
+  const { formSteps, activeStepIndex, onChangeStep, steppingDisabled } =
+    stepperContext;
+  return render ? (
+    render(stepperContext)
+  ) : (
     <Stepper
-      numSteps={numSteps}
-      currentStepIndex={activeStepIndex}
+      formSteps={formSteps}
+      activeStepIndex={activeStepIndex}
       onChangeStep={onChangeStep}
-      disabledStepping={!canStep}
+      steppingDisabled={steppingDisabled}
     />
   );
 }

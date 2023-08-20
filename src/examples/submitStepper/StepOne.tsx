@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DeepPartial, UseFormHandleSubmit, useForm } from "react-hook-form";
+import { DeepPartial, useForm } from "react-hook-form";
 import { z } from "zod";
 import { BaseSyntheticEvent, useEffect } from "react";
 import SubmitButton from "../../multiStepForm/SubmitButton";
 
-const stepOneSchema = z.object({
+export const stepOneSchema = z.object({
   firstName: z.string().min(3),
   lastName: z.string().min(3),
 });

@@ -12,8 +12,6 @@ export default function SubmitButton({
   const submitButtonRef = useContextRef("submitButton", {
     disabled,
     stepperSubmit: (nextStepIndex: number) => {
-      console.log("called imperative stepperSubmit", nextStepIndex);
-      console.log(onSubmit(nextStepIndex));
       onSubmit(nextStepIndex);
     },
   });

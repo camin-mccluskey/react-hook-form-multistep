@@ -49,7 +49,6 @@ export default function BasicExample() {
 
   return (
     <MultiStepForm>
-      <MultiStepForm.Stepper />
       <MultiStepForm.Step
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepOne

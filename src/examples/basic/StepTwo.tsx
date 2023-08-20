@@ -34,8 +34,6 @@ export default function StepTwo({
     formState: { errors, isDirty, isValid },
   } = methods;
 
-  console.log("step 2 errors", errors);
-
   useEffect(() => {
     reportValidity(isValid);
   }, [isValid]);

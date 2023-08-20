@@ -19,7 +19,7 @@ export type MultiStepFormStepRenderFunction<StepFormData extends FieldValues> =
     handleStepSubmit,
   }: {
     reportStepValidity: (isFormStepValid: boolean) => void;
-    handleStepSubmit: <T>(
-      onFormStepSubmit: (formStepDate: T) => void
-    ) => (formStepData: T) => void;
+    handleStepSubmit: <StepFormData extends FieldValues>(
+      onFormStepSubmit: (formStepDate: StepFormData) => void
+    ) => FormStepOnSubmit;
   }) => ReactElement<FormStepBaseProps<StepFormData>>;

@@ -64,7 +64,7 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
   const onChangeStep = useCallback(
     (newStepIndex: number) => {
       if (isFormValid) {
-        submitButtonRefs.at(0)?.meta?.stepperSubmit(newStepIndex);
+        submitButtonRefs[0]?.meta?.stepperSubmit(newStepIndex);
         // this is necessary (even though the above will navigate) to ensure form steps w/o submit buttons are navigated
         setActiveStepIndex(newStepIndex);
       }

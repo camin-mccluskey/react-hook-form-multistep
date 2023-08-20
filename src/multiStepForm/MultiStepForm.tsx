@@ -83,7 +83,7 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
         setActiveStepIndex(nextStepIndex);
       };
     },
-    [activeStepIndex, arrayStepChildren]
+    [activeStepIndex, numSteps]
   );
 
   const reportStepValidity = useCallback(
@@ -97,7 +97,7 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
       reportStepValidity,
       handleStepSubmit,
     }),
-    [activeStepIndex]
+    [activeStepIndex, handleStepSubmit, reportStepValidity]
   );
 
   const stepperContextValue = useMemo(
@@ -108,7 +108,7 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
       onChangeStep,
       steppingDisabled: !isFormValid,
     }),
-    [activeStepIndex, isFormValid]
+    [activeStepIndex, isFormValid, formSteps, numSteps, onChangeStep]
   );
 
   return (

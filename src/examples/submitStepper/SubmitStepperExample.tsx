@@ -36,7 +36,7 @@ const exampleData: ExampleFormData = {
 
 export default function SubmitStepperExample() {
   // store is the scratchpad for the child forms to play around with
-  const [store, setStore] = useState<DeepPartial<ExampleFormData>>(
+  const [store, setStore] = useState<Partial<ExampleFormData>>(
     exampleData ?? {}
   ); // this data will actually be a prop or network call
 
@@ -61,7 +61,7 @@ export default function SubmitStepperExample() {
     }));
   };
 
-  const onFinalSubmit = (data: DeepPartial<ExampleFormData>) => {
+  const onFinalSubmit = (data: Partial<ExampleFormData>) => {
     console.log("persisting to db: ", data);
   };
 

@@ -40,7 +40,7 @@ const stepThreeSchema = z.object({
 export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
 
 type StepThreeProps = {
-  data?: DeepPartial<StepThreeFormData>;
+  data?: Partial<StepThreeFormData>;
   onSubmit: FormStepOnSubmit<StepThreeFormData>;
   reportValidity: (isValid: boolean) => void;
 };

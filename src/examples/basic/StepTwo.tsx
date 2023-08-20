@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DeepPartial, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect } from "react";
 
@@ -13,7 +13,7 @@ const stepTwoSchema = z.object({
 export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
 
 type StepTwoProps = {
-  data?: DeepPartial<StepTwoFormData>;
+  data?: Partial<StepTwoFormData>;
   onSubmit: (formData: StepTwoFormData) => void;
   reportValidity: (isValid: boolean) => void;
 };

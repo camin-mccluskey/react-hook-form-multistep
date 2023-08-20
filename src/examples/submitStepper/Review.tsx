@@ -1,9 +1,8 @@
-import { DeepPartial } from "react-hook-form";
 import { ExampleFormData } from "./SubmitStepperExample";
 
 type ReviewProps = {
-  data?: DeepPartial<ExampleFormData>;
-  onSubmit: (formData: DeepPartial<ExampleFormData>) => void;
+  data?: Partial<ExampleFormData>;
+  onSubmit: (formData: Partial<ExampleFormData>) => void;
 };
 
 export default function Review({ data, onSubmit }: ReviewProps) {

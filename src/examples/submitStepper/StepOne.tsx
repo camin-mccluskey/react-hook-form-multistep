@@ -13,7 +13,7 @@ export const stepOneSchema = z.object({
 export type StepOneFormData = z.infer<typeof stepOneSchema>;
 
 export type StepOneProps = {
-  data?: DeepPartial<StepOneFormData>;
+  data?: Partial<StepOneFormData>;
   onSubmit: FormStepOnSubmit<StepOneFormData>;
   reportValidity: (isValid: boolean) => void;
   title: string;

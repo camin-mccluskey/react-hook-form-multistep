@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DeepPartial, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect } from "react";
 
@@ -12,7 +12,7 @@ export type StepOneFormData = z.infer<typeof stepOneSchema>;
 
 // every step takes these exact props
 export type StepOneProps = {
-  data?: DeepPartial<StepOneFormData>;
+  data?: Partial<StepOneFormData>;
   onSubmit: (formData: StepOneFormData) => void;
   reportValidity: (isValid: boolean) => void;
   // testing we can pass arbitrary props

@@ -14,7 +14,7 @@ export type StepOneFormData = z.infer<typeof stepOneSchema>;
 
 export type StepOneProps = {
   data?: DeepPartial<StepOneFormData>;
-  onSubmit: FormStepOnSubmit;
+  onSubmit: FormStepOnSubmit<StepOneFormData>;
   reportValidity: (isValid: boolean) => void;
   title: string;
 };

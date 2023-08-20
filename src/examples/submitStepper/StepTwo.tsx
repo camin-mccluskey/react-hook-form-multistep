@@ -16,7 +16,7 @@ export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
 
 type StepTwoProps = {
   data?: DeepPartial<StepTwoFormData>;
-  onSubmit: FormStepOnSubmit;
+  onSubmit: FormStepOnSubmit<StepTwoFormData>;
   reportValidity: (isValid: boolean) => void;
 };
 

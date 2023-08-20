@@ -3,7 +3,7 @@ import { FormStepOnSubmit } from "./types";
 
 type UseMultiStepSubmitProps<StepFormData extends FieldValues> = {
   handleSubmit: UseFormHandleSubmit<StepFormData>;
-  onSubmit: FormStepOnSubmit;
+  onSubmit: FormStepOnSubmit<StepFormData>;
 };
 
 const useMultiStepSubmit = <StepFormData extends FieldValues>({

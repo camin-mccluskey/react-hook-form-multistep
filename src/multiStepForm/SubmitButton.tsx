@@ -6,7 +6,7 @@ import { FormStepOnSubmit } from "./types";
 type SubmitButtonProps<StepFormData extends FieldValues> = {
   label?: string;
   handleSubmit: UseFormHandleSubmit<StepFormData>;
-  onSubmit: FormStepOnSubmit;
+  onSubmit: FormStepOnSubmit<StepFormData>;
   disabled: boolean;
 };
 
@@ -20,7 +20,7 @@ export default function SubmitButton<StepFormData extends FieldValues>({
   const submitButtonRef = useContextRef("submitButton", {
     disabled,
     stepperSubmit: (nextStepIndex: number) => {
-      multiStepOnSubmit(nextStepIndex);
+      void multiStepOnSubmit(nextStepIndex);
     },
   });
 

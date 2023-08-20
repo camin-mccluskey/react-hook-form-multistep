@@ -1,10 +1,11 @@
 import { useState } from "react";
-import MultiStepForm from "../../multiStepForm/MultiStepForm";
+import MultiStepForm from "../../multiStepForm";
 import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
 import { DeepPartial } from "react-hook-form";
 import StepThree, { Animal, Handedness, StepThreeFormData } from "./StepThree";
+import CustomStepper from "./CustomerStepper";
 
 /** This is a contrived example to demonstrate how to use the MultiStepForm component */
 /** Set up some types for the data we will manipulate in the form */
@@ -66,7 +67,9 @@ export default function SubmitStepperExample() {
 
   return (
     <MultiStepForm>
-      <MultiStepForm.Stepper />
+      <MultiStepForm.Stepper
+        render={(stepperProps) => CustomStepper(stepperProps)}
+      />
       <MultiStepForm.Step
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepOne

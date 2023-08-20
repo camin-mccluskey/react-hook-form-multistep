@@ -1,12 +1,12 @@
 type BasicStepperProps = {
   numSteps: number;
-  currentStepIndex: number;
+  activeStepIndex: number;
   steppingDisabled: boolean;
   onChangeStep: (stepIdx: number) => void;
 };
 export default function BasicStepper({
   numSteps,
-  currentStepIndex,
+  activeStepIndex,
   steppingDisabled,
   onChangeStep,
 }: BasicStepperProps) {
@@ -29,7 +29,7 @@ export default function BasicStepper({
             width: `${widthPc}%`,
             height: "100%",
             backgroundColor:
-              index === currentStepIndex
+              index === activeStepIndex
                 ? "blue"
                 : steppingDisabled
                 ? "black"

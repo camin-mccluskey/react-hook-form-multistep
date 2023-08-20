@@ -18,7 +18,7 @@ export const MultiStepFormStepsContext =
         onFormStepSubmit(formStepData),
   });
 
-type MultiStepFormStepperContextProps = {
+export type MultiStepFormStepperContextProps = {
   numSteps: number;
   activeStepIndex: number;
   onChangeStep: (newStepIndex: number) => void;

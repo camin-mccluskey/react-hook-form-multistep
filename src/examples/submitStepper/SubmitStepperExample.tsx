@@ -3,7 +3,6 @@ import MultiStepForm from "../../multiStepForm";
 import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
-import { DeepPartial } from "react-hook-form";
 import StepThree, { Animal, Handedness, StepThreeFormData } from "./StepThree";
 import CustomStepper from "./CustomerStepper";
 

@@ -3,7 +3,6 @@ import MultiStepForm from "../../multiStepForm/MultiStepForm";
 import StepOne, { StepOneFormData } from "./StepOne";
 import StepTwo, { StepTwoFormData } from "./StepTwo";
 import Review from "./Review";
-import { DeepPartial } from "react-hook-form";
 
 export type ExampleFormData = {
   firstName: string;

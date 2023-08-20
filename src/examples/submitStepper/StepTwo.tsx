@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DeepPartial, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect } from "react";
 import SubmitButton from "../../multiStepForm/SubmitButton";

@@ -1,4 +1,5 @@
 import MultiStepForm from "./MultiStepForm";
+import SubmitButton from "./SubmitButton";
 
-export { MultiStepForm };
+export { SubmitButton };
 export default MultiStepForm;

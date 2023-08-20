@@ -1,18 +1,16 @@
 type CustomStepperProps = {
-  numSteps: number;
+  formSteps: FormStep[];
   activeStepIndex: number;
   steppingDisabled: boolean;
   onChangeStep: (stepIdx: number) => void;
 };
 
 export default function CustomStepper({
-  numSteps,
+  formSteps,
   activeStepIndex,
   steppingDisabled,
   onChangeStep,
 }: CustomStepperProps) {
-  const steps = Array.from({ length: numSteps });
-
   return (
     <div
       style={{
@@ -23,7 +21,7 @@ export default function CustomStepper({
         gap: "10px",
       }}
     >
-      {steps.map((_, index) => {
+      {formSteps.map((step, index) => {
         const isCurrentStep = index === activeStepIndex;
         const isStepBeforeCurrent = index < activeStepIndex;
         let circleColor = "transparent";
@@ -40,16 +38,26 @@ export default function CustomStepper({
         return (
           <div
             key={index}
-            className="step"
             style={{
-              borderRadius: "50%",
-              border: "1px solid white",
-              width: "20px",
-              height: "20px",
-              backgroundColor: circleColor,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "3px",
             }}
-            onClick={() => onChangeStep(index)}
-          />
+          >
+            <div
+              className="step"
+              style={{
+                borderRadius: "50%",
+                border: "1px solid white",
+                width: "20px",
+                height: "20px",
+                backgroundColor: circleColor,
+              }}
+              onClick={() => onChangeStep(index)}
+            />
+            <p style={{ fontSize: "10px" }}>{step.name}</p>
+          </div>
         );
       })}
     </div>

@@ -71,6 +71,7 @@ export default function SubmitStepperExample() {
         render={(stepperProps) => CustomStepper(stepperProps)}
       />
       <MultiStepForm.Step
+        name="Step 1"
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepOne
             data={store}
@@ -81,6 +82,7 @@ export default function SubmitStepperExample() {
         )}
       />
       <MultiStepForm.Step
+        name="Step 2"
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepTwo
             data={store}

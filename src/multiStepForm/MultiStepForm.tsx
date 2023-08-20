@@ -15,6 +15,7 @@ import {
   MultiStepFormStepsContext,
 } from "./MultiStepFormContext";
 import { RefProvider, useRefs } from "react-context-refs";
+import { FormStep } from "./types";
 
 export type MultiStepFormProps<ParentFormData extends FieldValues> = {
   children:
@@ -36,11 +37,23 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
   children,
 }: MultiStepFormProps<ParentFormData>) {
   const arrayStepChildren = Children.toArray(children);
-  const includesStepper = Children.map(
-    arrayStepChildren,
-    (child) => child
-  ).some((child) => (child as ReactElement).type === MultiStepFormStepper);
-  const numSteps = arrayStepChildren.length - (includesStepper ? 1 : 0);
+  const formSteps: FormStep[] = Children.map(arrayStepChildren, (child) =>
+    (child as ReactElement).type === MultiStepFormStep
+      ? (child as ReactElement)
+      : undefined
+  )
+    .filter((child) => child !== undefined)
+    .map((child) => {
+      const step = child as ReactElement<
+        PropsWithChildren<MultiStepFormStepProps<ParentFormData>>
+      >;
+      return {
+        name: step.props.name,
+      };
+    });
+  const includesStepper = arrayStepChildren.length > formSteps.length;
+  const numSteps = formSteps.length;
+
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -84,17 +97,18 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
       reportStepValidity,
       handleStepSubmit,
     }),
-    [activeStepIndex, reportStepValidity, handleStepSubmit]
+    [activeStepIndex]
   );
 
   const stepperContextValue = useMemo(
     () => ({
+      formSteps,
       numSteps,
       activeStepIndex,
       onChangeStep,
       steppingDisabled: !isFormValid,
     }),
-    [numSteps, activeStepIndex, onChangeStep, isFormValid]
+    [activeStepIndex, isFormValid]
   );
 
   return (

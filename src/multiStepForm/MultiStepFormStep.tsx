@@ -1,25 +1,11 @@
-import { ReactElement, ReactNode } from "react";
-import { DeepPartial, FieldValues } from "react-hook-form";
+import { ReactNode } from "react";
+import { FieldValues } from "react-hook-form";
 import { useMultiStepFormContext } from "./MultiStepFormContext";
-
-type FormStepBaseProps<StepFormData extends FieldValues> = {
-  data?: DeepPartial<StepFormData>;
-  onSubmit: (formData: StepFormData) => void;
-  reportValidity: (isValid: boolean) => void;
-};
-
-type MultiStepFormStepRenderFunction<StepFormData extends FieldValues> = ({
-  reportStepValidity,
-  handleStepSubmit,
-}: {
-  reportStepValidity: (isFormStepValid: boolean) => void;
-  handleStepSubmit: <T>(
-    onFormStepSubmit: (formStepDate: T) => void
-  ) => (formStepData: T) => void;
-}) => ReactElement<FormStepBaseProps<StepFormData>>;
+import { MultiStepFormStepRenderFunction } from "./types";
 
 export type MultiStepFormStepProps<StepFormData extends FieldValues> = {
   renderStepForm: MultiStepFormStepRenderFunction<StepFormData>;
+  name?: string;
   formStepIndex?: number;
 };
 

@@ -1,7 +1,7 @@
 {
   "name": "react-hook-form-multistep",
   "description": "Extensible multistep forms for React Hook Form.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "author": {
     "name": "Camin McCluskey",

@@ -50,12 +50,8 @@ export default function StepThree({ data, onSubmit, reportValidity }: StepThreeP
     handleSubmit,
     register,
     control,
-    watch,
     formState: { errors, isValid },
   } = methods
-
-  console.log(errors)
-  console.log(watch)
 
   const {
     fields: pets,

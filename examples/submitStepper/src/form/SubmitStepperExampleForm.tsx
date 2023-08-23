@@ -57,7 +57,7 @@ export default function SubmitStepperExampleForm() {
   }
 
   const onFinalSubmit = (data: Partial<ExampleFormData>) => {
-    console.log('persisting to db: ', data)
+    console.log('Final Form Output: ', data)
   }
 
   return (

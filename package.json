@@ -3,7 +3,10 @@
   "description": "Extensible multistep forms for React Hook Form.",
   "version": "0.0.1",
   "private": false,
-  "author": "Camin McCluskey",
+  "author": {
+    "name": "Camin McCluskey",
+    "email": "camin@stackfix.com"
+  },
   "license": "MIT",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",

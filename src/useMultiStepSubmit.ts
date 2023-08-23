@@ -14,7 +14,7 @@ const useMultiStepSubmit = <StepFormData extends FieldValues>({
     return handleSubmit(
       (data, e) => onSubmit(data, e, nextStepIndex),
       (errors) => {
-        console.log('errors', errors)
+        console.error('errors', errors)
       },
     )()
   }

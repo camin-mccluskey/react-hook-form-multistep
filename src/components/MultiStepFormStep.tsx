@@ -1,6 +1,6 @@
 import type { FieldValues } from 'react-hook-form'
-import { useMultiStepFormContext } from './MultiStepFormContext'
-import type { MultiStepFormStepRenderFunction } from './types'
+import { useMultiStepFormContext } from '@context/MultiStepFormContext'
+import type { MultiStepFormStepRenderFunction } from '~/types'
 
 export type MultiStepFormStepProps<StepFormData extends FieldValues> = {
   renderStepForm: MultiStepFormStepRenderFunction<StepFormData>

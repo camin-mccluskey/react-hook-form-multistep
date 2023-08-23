@@ -1,5 +1,5 @@
 import React from 'react'
-import type { FormStep } from './types'
+import type { FormStep } from '~/types'
 
 type BasicStepperProps = {
   formSteps: FormStep[]
@@ -24,6 +24,7 @@ export default function BasicStepper({
         flexDirection: 'row',
       }}
     >
+      <p>yo</p>
       {formSteps.map((step, index) => (
         <div key={index} style={{ display: 'flex', flexDirection: 'column' }}>
           <div

@@ -31,8 +31,8 @@
   ],
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc --module es2022 --outDir lib/esm",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build:esm": "tsc --module es2022 --outDir lib/esm && tsc-alias -p tsconfig.json --outDir lib/esm",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs && tsc-alias -p tsconfig.json --outDir lib/cjs",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'",
@@ -55,12 +55,13 @@
     "@typescript-eslint/parser": "^6.4.1",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint": "^8.44.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.1",
+    "tsc-alias": "^1.8.7",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   }

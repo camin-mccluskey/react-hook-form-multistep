@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import type { MultiStepFormStepperContextFields, MultiStepFormStepsContextFields } from './types'
+import type { MultiStepFormStepperContextFields, MultiStepFormStepsContextFields } from '~/types'
 
 export const MultiStepFormStepsContext = createContext<MultiStepFormStepsContextFields>({
   activeStepIndex: 0,

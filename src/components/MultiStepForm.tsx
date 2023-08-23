@@ -11,9 +11,12 @@ import {
 } from 'react'
 import MultiStepFormStep, { type MultiStepFormStepProps } from './MultiStepFormStep'
 import MultiStepFormStepper from './MultiStepFormStepper'
-import { MultiStepFormStepperContext, MultiStepFormStepsContext } from './MultiStepFormContext'
+import {
+  MultiStepFormStepperContext,
+  MultiStepFormStepsContext,
+} from '@context/MultiStepFormContext'
 import { RefProvider, useRefs } from 'react-context-refs'
-import { type FormStep } from './types'
+import { type FormStep } from '~/types'
 
 export type MultiStepFormProps<ParentFormData extends FieldValues> = {
   children:

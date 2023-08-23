@@ -6,14 +6,23 @@
     // output .d.ts declaration files for consumers
     "declaration": true,
     // transpile JSX to React.createElement
+    "incremental": true,
     "jsx": "react",
-    "outDir": "./lib",
+    "outDir": "lib",
     "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@context/*": ["src/context/*"]
     }
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "outDir": "lib",
+    "verbose": true
   },
   "include": ["./src"],
   "exclude": ["./node_modules", "./examples", "./lib"]

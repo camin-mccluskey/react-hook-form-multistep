@@ -1,5 +1,5 @@
-import MultiStepForm from './MultiStepForm'
-import SubmitButton from './SubmitButton'
+import MultiStepForm from '@components/MultiStepForm'
+import SubmitButton from '@components/SubmitButton'
 import { FormStepOnSubmit, FormStep } from './types'
 
 export { SubmitButton, FormStepOnSubmit, FormStep }

@@ -1,7 +1,7 @@
 import React from 'react'
-import { useMultiStepFormContext } from './MultiStepFormContext'
+import { useMultiStepFormContext } from '@context/MultiStepFormContext'
 import Stepper from './Stepper'
-import type { MultiStepFormStepperContextFields } from './types'
+import type { MultiStepFormStepperContextFields } from '~/types'
 
 type MultiStepFormStepperProps = {
   render?: ({

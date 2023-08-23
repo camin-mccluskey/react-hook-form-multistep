@@ -1,8 +1,8 @@
 import React from 'react'
 import { useContextRef } from 'react-context-refs'
-import useMultiStepSubmit from './useMultiStepSubmit'
+import useMultiStepSubmit from '@hooks/useMultiStepSubmit'
 import type { FieldValues, UseFormHandleSubmit } from 'react-hook-form'
-import type { FormStepOnSubmit } from './types'
+import type { FormStepOnSubmit } from '~/types'
 
 type SubmitButtonProps<StepFormData extends FieldValues> = {
   label?: string

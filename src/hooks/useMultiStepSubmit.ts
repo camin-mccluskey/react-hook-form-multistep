@@ -1,5 +1,5 @@
 import type { FieldValues, UseFormHandleSubmit } from 'react-hook-form'
-import type { FormStepOnSubmit } from './types'
+import type { FormStepOnSubmit } from '~/types'
 
 type UseMultiStepSubmitProps<StepFormData extends FieldValues> = {
   handleSubmit: UseFormHandleSubmit<StepFormData>

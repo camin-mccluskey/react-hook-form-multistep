@@ -1,11 +1,31 @@
 {
   "name": "react-hook-form-multistep",
-  "private": false,
-  "version": "0.0.1-beta.0",
   "description": "Extensible multistep forms for React Hook Form.",
+  "version": "0.0.1",
+  "private": false,
+  "author": "Camin McCluskey",
+  "license": "MIT",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/camin-mccluskey/react-hook-form-multistep.git"
+  },
+  "homepage": "https://github.com/camin-mccluskey/react-hook-form-multistep",
+  "bugs": {
+    "url": "https://github.com/camin-mccluskey/react-hook-form-multistep/issues"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "form",
+    "forms",
+    "form-validation",
+    "validation",
+    "typescript",
+    "react-hooks"
+  ],
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc --module es2022 --outDir lib/esm",
@@ -15,8 +35,6 @@
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Camin McCluskey",
-  "license": "MIT",
   "dependencies": {
     "react-context-refs": "^0.2.1"
   },

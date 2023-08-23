@@ -6,7 +6,7 @@ type MultiStepFormSubmitButtonRefProps = {
 declare namespace ReactContextRefs {
   export interface Refs {
     submitButton: {
-      current: HTMLBUttonElement & MultiStepFormSubmitButtonRefProps
+      current: HTMLButtonElement & MultiStepFormSubmitButtonRefProps
       meta: MultiStepFormSubmitButtonRefProps
     }
   }

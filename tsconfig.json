@@ -7,9 +7,9 @@
     "declaration": true,
     // transpile JSX to React.createElement
     "jsx": "react",
-    "noEmit": true,
     "outDir": "./lib",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]

@@ -1,31 +1,17 @@
 {
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node-lts/tsconfig"],
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    // output .js.map sourcemap files for consumers
+    "sourceMap": true,
+    // output .d.ts declaration files for consumers
+    "declaration": true,
+    // transpile JSX to React.createElement
+    "jsx": "react",
+    // insist on type imports for type-only imports
+    "verbatimModuleSyntax": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "outDir": "./lib"
   },
-  "include": [
-    "src"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "include": ["./src"],
+  "exclude": ["./node_modules"]
 }

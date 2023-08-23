@@ -1,32 +1,46 @@
 {
-  "name": "sandbox",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "react-hook-form-multistep",
+  "private": false,
+  "version": "0.0.1-beta.0",
+  "description": "Extensible multistep forms for React Hook Form.",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc --module esnext --outDir lib/esm",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "Camin McCluskey",
+  "license": "MIT",
   "dependencies": {
     "@hookform/resolvers": "3.0.0",
+    "react-context-refs": "^0.2.1"
+  },
+  "peerDependencies": {
     "react": "^18.2.0",
-    "react-context-refs": "^0.2.1",
     "react-dom": "^18.2.0",
-    "react-hook-form": "7.43.9",
-    "zod": "3.21.4"
+    "react-hook-form": "7.43.9"
   },
   "devDependencies": {
+    "@tsconfig/node-lts": "^18.12.4",
+    "@tsconfig/strictest": "^2.0.1",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint": "^8.44.0",
-    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   }

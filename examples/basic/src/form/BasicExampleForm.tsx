@@ -1,6 +1,5 @@
-import React from 'react'
 import { useState } from 'react'
-import MultiStepForm from '../../../src'
+import MultiStepForm from 'react-hook-form-multistep'
 import StepOne, { type StepOneFormData } from './StepOne'
 import StepTwo, { type StepTwoFormData } from './StepTwo'
 import Review from './Review'
@@ -35,7 +34,7 @@ export default function BasicExampleForm() {
   }
 
   const onFinalSubmit = (data: Partial<ExampleFormData>) => {
-    console.log('persisting to db: ', data)
+    console.log('Final Form Ouput: ', data)
   }
 
   return (

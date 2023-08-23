@@ -1,0 +1,13 @@
+{
+  "extends": ["@tsconfig/vite-react"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "react": "react-jsx",
+    "paths": {
+      "~/*": ["src/*"],
+      "react-hook-form-multistep": ["../../src/"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

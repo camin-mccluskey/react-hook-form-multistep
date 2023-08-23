@@ -1,4 +1,3 @@
-import React from 'react'
 import type { ExampleFormData } from './BasicExampleForm'
 
 type ReviewProps = {

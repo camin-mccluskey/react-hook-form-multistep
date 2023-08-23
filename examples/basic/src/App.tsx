@@ -1,6 +1,5 @@
-import React from 'react'
-import './App.css'
-import BasicExampleForm from './form/BasicExampleForm'
+import '~/App.css'
+import BasicExampleForm from '~/form/BasicExampleForm'
 
 function App() {
   return (

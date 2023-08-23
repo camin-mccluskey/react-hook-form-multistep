@@ -29,6 +29,12 @@
     "typescript",
     "react-hooks"
   ],
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc --module es2022 --outDir lib/esm && tsc-alias -p tsconfig.json --outDir lib/esm",

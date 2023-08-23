@@ -42,7 +42,7 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Skipped: no test specified\" && exit 0"
   },
   "dependencies": {
     "react-context-refs": "^0.2.1"

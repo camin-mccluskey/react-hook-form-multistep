@@ -1,3 +1,3 @@
 export type FormStep = {
-  name?: string;
-};
+  name: string | undefined
+}

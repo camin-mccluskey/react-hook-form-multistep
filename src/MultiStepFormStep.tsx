@@ -1,12 +1,12 @@
-import { FieldValues } from "react-hook-form";
-import { useMultiStepFormContext } from "./MultiStepFormContext";
-import { MultiStepFormStepRenderFunction } from "./types";
+import type { FieldValues } from 'react-hook-form'
+import { useMultiStepFormContext } from './MultiStepFormContext'
+import type { MultiStepFormStepRenderFunction } from './types'
 
 export type MultiStepFormStepProps<StepFormData extends FieldValues> = {
-  renderStepForm: MultiStepFormStepRenderFunction<StepFormData>;
-  name?: string;
-  formStepIndex?: number;
-};
+  renderStepForm: MultiStepFormStepRenderFunction<StepFormData>
+  name?: string
+  formStepIndex?: number
+}
 
 export default function MultiStepFormStep<StepFormData extends FieldValues>({
   renderStepForm,
@@ -14,7 +14,7 @@ export default function MultiStepFormStep<StepFormData extends FieldValues>({
 }: MultiStepFormStepProps<StepFormData>) {
   const {
     stepsContext: { activeStepIndex, reportStepValidity, handleStepSubmit },
-  } = useMultiStepFormContext();
+  } = useMultiStepFormContext()
 
   return formStepIndex === activeStepIndex
     ? // render step's child form
@@ -22,5 +22,5 @@ export default function MultiStepFormStep<StepFormData extends FieldValues>({
         reportStepValidity,
         handleStepSubmit,
       })
-    : null;
+    : null
 }

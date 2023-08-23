@@ -8,11 +8,11 @@
   "types": "./lib/esm/index.d.ts",
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc --module esnext --outDir lib/esm",
+    "build:esm": "tsc --module es2022 --outDir lib/esm",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Camin McCluskey",

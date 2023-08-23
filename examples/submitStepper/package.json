@@ -1,8 +1,8 @@
 {
-  "name": "basic",
+  "name": "advanced-customer-stepper",
   "private": "true",
   "version": "1.0.0",
-  "description": "Basic example usage of react-hook-form-multistep",
+  "description": "More advanced example usage of react-hook-form-multistep (with custom stepper component)",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -1,74 +1,68 @@
-import { useState } from "react";
-import MultiStepForm from "../../multiStepForm";
-import StepOne, { StepOneFormData } from "./StepOne";
-import StepTwo, { StepTwoFormData } from "./StepTwo";
-import Review from "./Review";
-import StepThree, { Animal, Handedness, StepThreeFormData } from "./StepThree";
-import CustomStepper from "./CustomerStepper";
+import { useState } from 'react'
+import MultiStepForm from 'react-hook-form-multistep'
+import StepOne, { type StepOneFormData } from './StepOne'
+import StepTwo, { type StepTwoFormData } from './StepTwo'
+import Review from './Review'
+import StepThree, { Animal, Handedness, type StepThreeFormData } from './StepThree'
+import CustomStepper from '~/components/CustomerStepper'
 
 /** This is a contrived example to demonstrate how to use the MultiStepForm component */
 /** Set up some types for the data we will manipulate in the form */
 
-export type ExampleFormData = StepOneFormData &
-  StepTwoFormData &
-  StepThreeFormData;
+export type ExampleFormData = StepOneFormData & StepTwoFormData & StepThreeFormData
 
 /** Set up some example data to populate the form initially. This is not necessary but it does demonstrate how the form can be used to both create and edit data */
 const exampleData: ExampleFormData = {
-  firstName: "Camin",
-  lastName: "McCluskey",
+  firstName: 'Camin',
+  lastName: 'McCluskey',
   address: {
-    street: "14 Random Road",
-    countryCode: "GB",
+    street: '14 Random Road',
+    countryCode: 'GB',
   },
   other: {
     favouriteAnimal: Animal.CAT,
     handedness: Handedness.LEFT,
     pets: [
       {
-        name: "Fluffy",
+        name: 'Fluffy',
         type: Animal.CAT,
       },
     ],
   },
-};
+}
 
-export default function SubmitStepperExample() {
+export default function SubmitStepperExampleForm() {
   // store is the scratchpad for the child forms to play around with
-  const [store, setStore] = useState<Partial<ExampleFormData>>(
-    exampleData ?? {}
-  ); // this data will actually be a prop or network call
+  const [store, setStore] = useState<Partial<ExampleFormData>>(exampleData ?? {}) // this data will actually be a prop or network call
 
   const onSubmitStepOne = (data: StepOneFormData) => {
     setStore((prev) => ({
       ...prev,
       ...data,
-    }));
-  };
+    }))
+  }
 
   const onSubmitStepTwo = (data: StepTwoFormData) => {
     setStore((prev) => ({
       ...prev,
       ...data,
-    }));
-  };
+    }))
+  }
 
   const onSubmitStepThree = (data: StepThreeFormData) => {
     setStore((prev) => ({
       ...prev,
       ...data,
-    }));
-  };
+    }))
+  }
 
   const onFinalSubmit = (data: Partial<ExampleFormData>) => {
-    console.log("persisting to db: ", data);
-  };
+    console.log('persisting to db: ', data)
+  }
 
   return (
     <MultiStepForm>
-      <MultiStepForm.Stepper
-        render={(stepperProps) => CustomStepper(stepperProps)}
-      />
+      <MultiStepForm.Stepper render={(stepperProps) => CustomStepper(stepperProps)} />
       <MultiStepForm.Step
         name="Step 1"
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
@@ -106,5 +100,5 @@ export default function SubmitStepperExample() {
         )}
       />
     </MultiStepForm>
-  );
+  )
 }

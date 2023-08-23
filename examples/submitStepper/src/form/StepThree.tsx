@@ -1,23 +1,22 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { z } from "zod";
-import { useEffect } from "react";
-import SubmitButton from "../../multiStepForm/SubmitButton";
-import { FormStepOnSubmit } from "../../multiStepForm/types";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useFieldArray, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useEffect } from 'react'
+import { SubmitButton, type FormStepOnSubmit } from 'react-hook-form-multistep'
 
 export const Animal = {
-  DOG: "DOG",
-  CAT: "CAT",
-  BIRD: "BIRD",
-  FISH: "FISH",
-} as const;
-type Animal = (typeof Animal)[keyof typeof Animal];
+  DOG: 'DOG',
+  CAT: 'CAT',
+  BIRD: 'BIRD',
+  FISH: 'FISH',
+} as const
+type Animal = (typeof Animal)[keyof typeof Animal]
 
 export const Handedness = {
-  LEFT: "LEFT",
-  RIGHT: "RIGHT",
-} as const;
-type Handedness = (typeof Handedness)[keyof typeof Handedness];
+  LEFT: 'LEFT',
+  RIGHT: 'RIGHT',
+} as const
+type Handedness = (typeof Handedness)[keyof typeof Handedness]
 
 const stepThreeSchema = z.object({
   other: z.object({
@@ -27,40 +26,36 @@ const stepThreeSchema = z.object({
       z.object({
         name: z.string().min(1),
         type: z.nativeEnum(Animal),
-      })
+      }),
     ),
   }),
-});
+})
 
-export type StepThreeFormData = z.input<typeof stepThreeSchema>;
+export type StepThreeFormData = z.input<typeof stepThreeSchema>
 
 type StepThreeProps = {
-  data?: Partial<StepThreeFormData>;
-  onSubmit: FormStepOnSubmit<StepThreeFormData>;
-  reportValidity: (isValid: boolean) => void;
-};
+  data?: Partial<StepThreeFormData>
+  onSubmit: FormStepOnSubmit<StepThreeFormData>
+  reportValidity: (isValid: boolean) => void
+}
 
-export default function StepThree({
-  data,
-  onSubmit,
-  reportValidity,
-}: StepThreeProps) {
+export default function StepThree({ data, onSubmit, reportValidity }: StepThreeProps) {
   const methods = useForm<StepThreeFormData>({
     defaultValues: data,
-    mode: "all",
-    reValidateMode: "onChange",
+    mode: 'all',
+    reValidateMode: 'onChange',
     resolver: zodResolver(stepThreeSchema),
-  });
+  })
   const {
     handleSubmit,
     register,
     control,
     watch,
     formState: { errors, isValid },
-  } = methods;
+  } = methods
 
-  console.log(errors);
-  console.log(watch);
+  console.log(errors)
+  console.log(watch)
 
   const {
     fields: pets,
@@ -68,20 +63,20 @@ export default function StepThree({
     remove,
   } = useFieldArray<StepThreeFormData>({
     control,
-    name: "other.pets",
-  });
+    name: 'other.pets',
+  })
 
   useEffect(() => {
-    reportValidity(isValid);
-  }, [isValid]);
+    reportValidity(isValid)
+  }, [isValid])
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       style={{
-        gap: "5px",
-        display: "flex",
-        flexDirection: "column",
+        gap: '5px',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <label>Favourite animal</label>
@@ -97,30 +92,18 @@ export default function StepThree({
           />
         )}
       />
-      <p style={{ fontSize: "10px", color: "red" }}>
-        {errors.other?.favouriteAnimal?.message}
-      </p>
+      <p style={{ fontSize: '10px', color: 'red' }}>{errors.other?.favouriteAnimal?.message}</p>
       <label>Handedness</label>
-      <div style={{ display: "flex", gap: "5px" }}>
-        <input
-          type="radio"
-          {...register("other.handedness")}
-          value={Handedness.LEFT}
-        />
+      <div style={{ display: 'flex', gap: '5px' }}>
+        <input type="radio" {...register('other.handedness')} value={Handedness.LEFT} />
         <label>Left</label>
-        <input
-          type="radio"
-          {...register("other.handedness")}
-          value={Handedness.RIGHT}
-        />
+        <input type="radio" {...register('other.handedness')} value={Handedness.RIGHT} />
         <label>Right</label>
-        <p style={{ fontSize: "10px", color: "red" }}>
-          {errors.other?.handedness?.message}
-        </p>
+        <p style={{ fontSize: '10px', color: 'red' }}>{errors.other?.handedness?.message}</p>
       </div>
       <label>Pets</label>
       {pets.map((pet, index) => (
-        <div key={pet.id} style={{ display: "flex", gap: "10px" }}>
+        <div key={pet.id} style={{ display: 'flex', gap: '10px' }}>
           <label>Pet name: </label>
           <input type="text" {...register(`other.pets.${index}.name`)} />
           <label>Pet type: </label>
@@ -139,19 +122,12 @@ export default function StepThree({
           <button onClick={() => remove(index)}>Remove</button>
         </div>
       ))}
-      <button
-        type="button"
-        onClick={() => append({ name: "", type: Animal.DOG })}
-      >
+      <button type="button" onClick={() => append({ name: '', type: Animal.DOG })}>
         Add a pet
       </button>
-      <SubmitButton
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        disabled={!isValid}
-      />
+      <SubmitButton handleSubmit={handleSubmit} onSubmit={onSubmit} disabled={!isValid} />
     </form>
-  );
+  )
 }
 
 /** Demo of controlled component */
@@ -160,22 +136,19 @@ const AnimalSelector = ({
   onChange,
   errorMsg,
 }: {
-  value: Animal;
-  onChange: (value: Animal) => void;
-  errorMsg?: string;
+  value: Animal
+  onChange: (value: Animal) => void
+  errorMsg?: string
 }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.currentTarget.value as Animal)}
-      >
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <select value={value} onChange={(e) => onChange(e.currentTarget.value as Animal)}>
         <option value={Animal.CAT}>Cat</option>
         <option value={Animal.DOG}>Dog</option>
         <option value={Animal.BIRD}>Bird</option>
         <option value={Animal.FISH}>Fish</option>
       </select>
-      <p style={{ fontSize: "10px", color: "red" }}>{errorMsg}</p>
+      <p style={{ fontSize: '10px', color: 'red' }}>{errorMsg}</p>
     </div>
-  );
-};
+  )
+}

@@ -1,66 +1,58 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useEffect } from "react";
+import React from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useEffect } from 'react'
 
 const stepOneSchema = z.object({
   firstName: z.string().min(3),
   lastName: z.string().min(3),
-});
+})
 
-export type StepOneFormData = z.input<typeof stepOneSchema>;
+export type StepOneFormData = z.input<typeof stepOneSchema>
 
 // every step takes these exact props
 export type StepOneProps = {
-  data?: Partial<StepOneFormData>;
-  onSubmit: (formData: StepOneFormData) => void;
-  reportValidity: (isValid: boolean) => void;
+  data?: Partial<StepOneFormData>
+  onSubmit: (formData: StepOneFormData) => void
+  reportValidity: (isValid: boolean) => void
   // testing we can pass arbitrary props
-  title: string;
-};
+  title: string
+}
 
-export default function StepOne({
-  data,
-  onSubmit,
-  reportValidity,
-  title,
-}: StepOneProps) {
+export default function StepOne({ data, onSubmit, reportValidity, title }: StepOneProps) {
   const methods = useForm<StepOneFormData>({
     defaultValues: data,
-    mode: "all",
+    mode: 'all',
     resolver: zodResolver(stepOneSchema),
-  });
+  })
   const {
     handleSubmit,
     register,
     formState: { errors, isValid },
-  } = methods;
+  } = methods
 
   useEffect(() => {
-    reportValidity(isValid);
-  }, [isValid]);
+    reportValidity(isValid)
+  }, [isValid])
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       style={{
-        gap: "5px",
-        display: "flex",
-        flexDirection: "column",
+        gap: '5px',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <h3 style={{}}>{title}</h3>
       <label>First Name</label>
-      <input type="text" {...register("firstName")} />
-      <p style={{ fontSize: "10px", color: "red" }}>
-        {errors.firstName?.message}
-      </p>
+      <input type="text" {...register('firstName')} />
+      <p style={{ fontSize: '10px', color: 'red' }}>{errors.firstName?.message}</p>
       <label>Last Name</label>
-      <input type="text" {...register("lastName")} />
-      <p style={{ fontSize: "10px", color: "red" }}>
-        {errors.lastName?.message}
-      </p>
+      <input type="text" {...register('lastName')} />
+      <p style={{ fontSize: '10px', color: 'red' }}>{errors.lastName?.message}</p>
       <input type="submit" value="Next" disabled={!isValid} />
     </form>
-  );
+  )
 }

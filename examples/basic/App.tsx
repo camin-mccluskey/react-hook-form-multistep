@@ -1,23 +1,22 @@
-import "./App.css";
-import BasicExample from "./examples/basic/BasicExample";
-import SubmitStepperExample from "./examples/submitStepper/SubmitStepperExample";
+import React from 'react'
+import './App.css'
+import BasicExampleForm from './form/BasicExampleForm'
 
 function App() {
   return (
     <div
       className="App"
       style={{
-        height: "fit-content",
-        width: "100%",
-        display: "grid",
-        grid: "50% / auto auto auto",
-        gridGap: "10rem",
+        height: 'fit-content',
+        width: '100%',
+        display: 'grid',
+        grid: '50% / auto auto auto',
+        gridGap: '10rem',
       }}
     >
-      <BasicExample />
-      <SubmitStepperExample />
+      <BasicExampleForm />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

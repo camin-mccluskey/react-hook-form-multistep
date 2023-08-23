@@ -6,7 +6,7 @@
     // output .d.ts declaration files for consumers
     "declaration": true,
     // transpile JSX to React.createElement
-    "jsx": "react-jsx",
+    "jsx": "react",
     "noEmit": true,
     "outDir": "./lib",
     "lib": ["dom", "dom.iterable", "esnext"],

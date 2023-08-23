@@ -1,5 +1,7 @@
 # React Hook Form Multi-Step
 
+[![npm version](https://badge.fury.io/js/react-hook-form-multistep.svg)](https://badge.fury.io/js/react-hook-form-multistep)
+
 Create react-hook-forms with multistep functionality.
 
 - ✅ Bring your existing forms using react-hook-form.

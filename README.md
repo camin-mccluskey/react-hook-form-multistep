@@ -57,3 +57,22 @@ function App() {
 
 // FormOne and FormTwo are simple react-hook-forms
 ```
+
+## Complex forms
+
+For complex forms with deeply nested fields, and particularly ones with [useFieldArray](https://www.react-hook-form.com/api/usefieldarray/) the simple `setState({ ...data, ...state })` approach to saving each form step will not work. `setState` does a shallow merge of object properties. The snippet below is a helper which will deeply merge object properties and handles array inputs properly (i.e. overwriting the existing array with the new array in the submitted form step).
+
+```typescript
+import mergeWith from 'lodash.mergewith'
+import { type DeepPartial } from 'react-hook-form'
+
+export default function mergeFormState<T extends object>(object: T, source: DeepPartial<T>): T {
+  return mergeWith(object, source, replaceArrayOnMerge)
+}
+
+const replaceArrayOnMerge = <T,>(objValue: T, srcValue: DeepPartial<T>) => {
+  if (Array.isArray(objValue)) {
+    return srcValue
+  }
+}
+```

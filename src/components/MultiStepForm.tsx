@@ -70,7 +70,7 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
         // Unless stepperSubmitFinal == true, then if final step and going backward - don't submit form step
         // Submit button will submit and move forward always (onChangeStep is not called)
         const shouldSubmitFromStepper =
-          stepperSubmitFinal || newStepIndex > activeStepIndex || newStepIndex !== numSteps - 1
+          stepperSubmitFinal || newStepIndex > activeStepIndex || activeStepIndex !== numSteps - 1
         if (shouldSubmitFromStepper) {
           console.log('hit branch - would submit from stepper')
           submitButtonRefs[0]?.meta?.stepperSubmit(newStepIndex)

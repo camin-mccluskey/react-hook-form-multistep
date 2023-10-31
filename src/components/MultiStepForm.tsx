@@ -28,10 +28,13 @@ export type MultiStepFormProps<ParentFormData extends FieldValues> = {
 
 function MultiStepForm<ParentFormData extends FieldValues>({
   children,
+  stepperSubmitFinal = true,
 }: MultiStepFormProps<ParentFormData>) {
   return (
     <RefProvider>
-      <MultiStepFormContent>{children}</MultiStepFormContent>
+      <MultiStepFormContent stepperSubmitFinal={stepperSubmitFinal}>
+        {children}
+      </MultiStepFormContent>
     </RefProvider>
   )
 }
@@ -65,7 +68,11 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
     (newStepIndex: number) => {
       if (isFormValid) {
         // Unless stepperSubmitFinal == true, then if final step and going backward - don't submit form step
-        if (stepperSubmitFinal || newStepIndex > activeStepIndex || activeStepIndex === numSteps) {
+        // Submit button will submit and move forward always (onChangeStep is not called)
+        const shouldSubmitFromStepper =
+          stepperSubmitFinal || newStepIndex > activeStepIndex || newStepIndex !== numSteps - 1
+        if (shouldSubmitFromStepper) {
+          console.log('hit branch - would submit from stepper')
           submitButtonRefs[0]?.meta?.stepperSubmit(newStepIndex)
         }
         // this is necessary (even though the above will navigate) to ensure form steps w/o submit buttons are navigated

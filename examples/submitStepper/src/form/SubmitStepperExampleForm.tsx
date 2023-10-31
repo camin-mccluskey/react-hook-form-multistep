@@ -61,7 +61,7 @@ export default function SubmitStepperExampleForm() {
   }
 
   return (
-    <MultiStepForm>
+    <MultiStepForm stepperSubmitFinal={false}>
       <MultiStepForm.Stepper render={(stepperProps) => CustomStepper(stepperProps)} />
       <MultiStepForm.Step
         name="Step 1"

@@ -51,7 +51,7 @@ export default function CustomStepper({
               className="step"
               style={{
                 borderRadius: '50%',
-                border: '1px solid white',
+                border: '1px solid black',
                 width: '20px',
                 height: '20px',
                 backgroundColor: circleColor,

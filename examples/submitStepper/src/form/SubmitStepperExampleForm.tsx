@@ -85,6 +85,7 @@ export default function SubmitStepperExampleForm() {
         )}
       />
       <MultiStepForm.Step
+        name="Step 3"
         renderStepForm={({ reportStepValidity, handleStepSubmit }) => (
           <StepThree
             data={store}

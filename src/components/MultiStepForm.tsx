@@ -72,7 +72,6 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
         const shouldSubmitFromStepper =
           stepperSubmitFinal || newStepIndex > activeStepIndex || activeStepIndex !== numSteps - 1
         if (shouldSubmitFromStepper) {
-          console.log('hit branch - would submit from stepper')
           submitButtonRefs[0]?.meta?.stepperSubmit(newStepIndex)
         }
         // this is necessary (even though the above will navigate) to ensure form steps w/o submit buttons are navigated

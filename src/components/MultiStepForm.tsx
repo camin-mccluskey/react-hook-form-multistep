@@ -22,6 +22,8 @@ export type MultiStepFormProps<ParentFormData extends FieldValues> = {
   children:
     | ReactElement<MultiStepFormStepProps<Partial<ParentFormData>>>
     | ReactElement<MultiStepFormStepProps<Partial<ParentFormData>>>[]
+  /** Should Stepper be allowed to submit final step (clicking backwards). */
+  stepperSubmitFinal?: boolean
 }
 
 function MultiStepForm<ParentFormData extends FieldValues>({
@@ -36,6 +38,7 @@ function MultiStepForm<ParentFormData extends FieldValues>({
 
 function MultiStepFormContent<ParentFormData extends FieldValues>({
   children,
+  stepperSubmitFinal = true,
 }: MultiStepFormProps<ParentFormData>) {
   const arrayStepChildren = Children.toArray(children)
   const formSteps: FormStep[] = Children.map(arrayStepChildren, (child) =>
@@ -61,7 +64,10 @@ function MultiStepFormContent<ParentFormData extends FieldValues>({
   const onChangeStep = useCallback(
     (newStepIndex: number) => {
       if (isFormValid) {
-        submitButtonRefs[0]?.meta?.stepperSubmit(newStepIndex)
+        // Unless stepperSubmitFinal == true, then if final step and going backward - don't submit form step
+        if (stepperSubmitFinal || newStepIndex > activeStepIndex || activeStepIndex === numSteps) {
+          submitButtonRefs[0]?.meta?.stepperSubmit(newStepIndex)
+        }
         // this is necessary (even though the above will navigate) to ensure form steps w/o submit buttons are navigated
         setActiveStepIndex(newStepIndex)
       }

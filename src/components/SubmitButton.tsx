@@ -7,6 +7,7 @@ import type { FormStepOnSubmit } from '~/types'
 type SubmitButtonProps<StepFormData extends FieldValues> = {
   label?: string
   className?: string
+  children?: React.ReactNode
   handleSubmit: UseFormHandleSubmit<StepFormData>
   onSubmit: FormStepOnSubmit<StepFormData>
   disabled: boolean
@@ -15,6 +16,7 @@ type SubmitButtonProps<StepFormData extends FieldValues> = {
 export default function SubmitButton<StepFormData extends FieldValues>({
   label = 'Next',
   className,
+  children,
   handleSubmit,
   onSubmit,
   disabled,
@@ -29,7 +31,7 @@ export default function SubmitButton<StepFormData extends FieldValues>({
 
   return (
     <button type="submit" className={className} disabled={disabled} ref={submitButtonRef}>
-      {label}
+      {children || label}
     </button>
   )
 }

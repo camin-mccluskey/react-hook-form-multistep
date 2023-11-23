@@ -50,7 +50,12 @@ export default function StepTwo({ data, onSubmit, reportValidity }: StepTwoProps
       <label>Country Code</label>
       <input type="text" {...register('address.countryCode')} />
       <p style={{ fontSize: '10px', color: 'red' }}>{errors.address?.countryCode?.message}</p>
-      <SubmitButton handleSubmit={handleSubmit} onSubmit={onSubmit} disabled={!isValid} />
+      <SubmitButton
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        disabled={!isValid}
+        label="Next Step"
+      />
     </form>
   )
 }
